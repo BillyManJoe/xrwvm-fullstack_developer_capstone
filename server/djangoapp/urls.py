@@ -2,7 +2,6 @@
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-from .restapis import get_request, analyze_review_sentiments, post_review
 
 from . import views
 
@@ -16,7 +15,7 @@ urlpatterns = [
     path('register', views.registration, name='register'),
     path(route='get_cars', view=views.get_cars, name ='getcars'),
    
-    path(route='get_dealers', view=views.get_dealerships, name='get_dealers'),
+   path(route='get_dealers/', view=views.get_dealerships, name='get_dealers'),
         path(route='get_dealers/<str:state>', view=views.get_dealerships, name='get_dealers_by_state'),
     # path for dealer reviews view
 

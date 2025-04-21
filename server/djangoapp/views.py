@@ -8,6 +8,7 @@ from django.contrib.auth import logout
 from django.contrib import messages
 from datetime import datetime
 
+
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate
 import logging
@@ -15,7 +16,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
 from .models import CarMake, CarModel
-
+from .restapis import get_request, analyze_review_sentiments, post_review
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -120,12 +121,17 @@ def get_dealer_details(request, dealer_id):
         return JsonResponse({"status":400,"message":"Bad Request"})
 
 def add_review(request):
-    if(request.user.is_anonymous == False):
+    print("hi")
+    if(True):
+        print("2")
         data = json.loads(request.body)
+        print(data)
+        print("hey")
         try:
             response = post_review(data)
             return JsonResponse({"status":200})
         except:
             return JsonResponse({"status":401,"message":"Error in posting review"})
     else:
+        print("lol")
         return JsonResponse({"status":403,"message":"Unauthorized"})
